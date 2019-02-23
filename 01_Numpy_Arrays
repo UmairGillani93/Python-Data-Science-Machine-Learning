@@ -1,0 +1,20 @@
+import numpy as np
+import pandas as pd
+
+from numpy.random import randn
+
+
+df = pd.DataFrame(randn(4,4),[1,2,3,4],['A','B','C','D'])
+
+print(df)
+
+print(df['A'])
+print(type(df['A']))
+
+df['new'] = df['A'] + df['D']
+
+print(df['new'])
+
+print(df)
+
+print(df.drop('new',axis=1,inplace=False)
