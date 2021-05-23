@@ -69,3 +69,17 @@ print("shape of t1: ", t1.shape)
 
 print('\n')
 print(t1)
+
+# Arithematic Operations
+t1 = torch.rand(4,2)
+t2 = torch.rand(2,4)
+
+# matrix multiplication
+y1 = t1 @ t2
+print(y1)
+print('\n')
+print(y1)
+
+
+y2 = torch.rand_like(tensor)
+print(torch.matmul(tensor, tensor.T))
