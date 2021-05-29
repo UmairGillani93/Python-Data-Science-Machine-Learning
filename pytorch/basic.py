@@ -71,3 +71,24 @@ new_tensor1 = torch.zeros(SHAPE)
 t1 = torch.cat([new_tensor, new_tensor1], dim=0)
 
 print(t1)
+
+
+# MATRIX MULTIPLICATION
+t1 = torch.ones(SHAPE)
+t2 = torch.rand(SHAPE)
+
+result = t1 @ t2
+print(result)
+
+
+# ELEMENT-WIISE MULTIPLICATION
+result_element_wise = t1 * t2
+print(result_element_wise)
+
+SHAPE = (1,4)
+
+tensor_sum = torch.ones(SHAPE).sum()
+print(tensor_sum)
+
+tensor_item = tensor_sum.item()
+print(type(tensor_item))
