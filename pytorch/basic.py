@@ -1,85 +1,73 @@
+# creating pytorch tensor from data
 import torch
 import numpy as np
 
-# creating tensors from data
-data = [[1,2], [3,4]]
+data = [[1,2],
+        [3,4]]
+
 x_data = torch.tensor(data)
+print(x_data)
 
-print(type(data))
-print(type(x_data))
-
-# creating tensor from numpy array
+# from  numpy array
 arr = np.array(data)
 x_np = torch.from_numpy(arr)
 
-print(type(arr))
-print(type(x_np))
+print(x_np)
 
-# converts data to ones like tensor
+# retains the properties of x_data
 x_ones = torch.ones_like(x_data)
-print(x_ones)
+print(f"ones like tensor of the shape x_data: {x_ones}")
 
-x_rand = torch.rand_like(torch.tensor(data), dtype=torch.float)
-print(x_rand)
-
-# defining Tensor with giving it's shape
-SHAPE = (2,3,)
-
-rand_tensor = torch.rand(SHAPE)
-ones_tensor = torch.ones(SHAPE)
-zeros_tensor = torch.zeros(SHAPE)
-
-print(f"Random tensor: {rand_tensor} \n ")
-print(f"Ones tensor: {ones_tensor} \n")
-print(f"Zeros tensor: {zeros_tensor} \n")
+# retains the properties of x_data
+x_rand = torch.rand_like(x_data, dtype=torch.float)
+print(f"rand like tensor of the shape x_data: \n{x_rand}")
 
 
-# Attributes of a Tensor
-tensor = torch.rand(3,4)
-print(f"shape of tensor: {tensor.shape}")
-print(f"data type of tensor: {tensor.dtype}")
-print(f"device of tensor: {tensor.device}")
+# creating tensor from shape
+shape = (2,3)
+
+print(f'Ones tensor of the shape given above: \n{torch.ones(shape)}')
+print(f'Random tensor of the shape given above: \n{torch.rand(shape)}')
 
 
-# define the device of tensor
-if torch.cuda.is_available():
-    tensor = tensor.to("cuda")
+# ATTRIBUTES OF TENSOR
+tensor = torch.rand(shape)
+print(f"Shape of tensor: {tensor.shape}")
+print(f'tensor size: \n{tensor.size}')
+print(f'tensor device: \n{tensor.device}')
 
+# OPERATIONS ON TENSORS
+print(torch.cuda.is_available()) # cuda not available -> False
 
-tensor = torch.ones(4,4)
-# grab first row
-print("First row: ", tensor[0])
-# grab all columns and first row
-print("All columns and first row: ", tensor[0, :])
+SHAPE = (4,4) # shape of 2D tensor
+ones = torch.ones(SHAPE)
+print(f'first row: \n{ones[0]}')
+print(f'second row: \n{ones[1]}')
 
+new_data = [[1,2,3,4],
+            [5,6,7,8],
+            [-1,-2,-3,-4],
+            [-5,-6,-7,-8]]
 
-tensor1 = torch.ones(2,4)
-print(tensor1)
+new_tensor = torch.tensor(new_data)
 
-print('first row: ', tensor1[0])
-print('first column: ', tensor1[1])
+print(f'first row of new_data: \n{new_data[0]}')
+print(f'second row of new_data: \n{new_data[1]}')
+print(f'third row of new_data: \n{new_data[2]}')
 
-print('first row and all columns: ', tensor1[0, :])
+# # index first column
+print(f'first columns new_tensor: \n{new_tensor[:, 0]}')
+print(f'second columns new_tensor: \n{new_tensor[:, 1]}')
+print(f'third columns new_tensor: \n{new_tensor[:, 2]}')
+print(f'last columns new_tensor: \n{new_tensor[:, -1]}')
+print(new_tensor.shape)
 
-print('first column and all rows: ', tensor1[:, 0])
+# first columns Zero
+new_tensor[:, 1] = 0
+print(new_tensor)
 
-t1 = torch.cat([tensor, tensor1])
+# concatenating two tensors
+new_tensor1 = torch.zeros(SHAPE)
+t1 = torch.cat([new_tensor, new_tensor1], dim=0)
 
-print("shape of t1: ", t1.shape)
-
-print('\n')
 print(t1)
-
-# Arithematic Operations
-t1 = torch.rand(4,2)
-t2 = torch.rand(2,4)
-
-# matrix multiplication
-y1 = t1 @ t2
-print(y1)
-print('\n')
-print(y1)
-
-
-y2 = torch.rand_like(tensor)
-print(torch.matmul(tensor, tensor.T))
